@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <style>
+        #draggable {
+            border: solid 1px black;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            background-color: aqua
+        }
+
+        #droppable {
+            border: dotted 3px black;
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            background-color: yellow
+        }
+
+    </style>
+
+<body>
+
+    <div id="draggable">
+        <p>Draggable element</p>
+    </div>
+    <br><br><br>
+    <div id="droppable">
+        <p>Droppable element</p>
+    </div>
+
+    <script>
+        $(function() {
+            $('#draggable').draggable();
+            $('#droppable').droppable({
+                addClasses: false,
+                drop(event, ui) {
+                    $(ui.draggable).addClass('out')
+                        .html('Dropped'),
+                        $(this).addClass('in');
+                    alert(`Item is dropped ${index.item + 1} times`)
+                },
+
+                out(event, ui) {
+                    $(ui.draggable)
+                        .html('Drop me again'),
+                        $(this);
+                    index.item += 1
+                }
+            });
+            let index = {
+                item: 0
+            }
+        })
+    </script>
+</body>
+</head>
+
+</html>
